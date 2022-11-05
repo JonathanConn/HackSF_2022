@@ -12,6 +12,11 @@
   align-items: center;
 }
 
+.center {
+  margin: 0 auto;
+  display: block;
+}
+
 .footer {
   display: flex;
   flex: 1;

@@ -47,25 +47,25 @@ export default function MintForm() {
 
                         metadata.data.image = `${BASE_URI}${pngccid.IpfsHash}`;
 
-                        // console.log('gen metadata')
-                        // genMetaFile(metadata)
-                        //     .then((metaPath) => {
-                        //         console.log('upload metadata to ipfs')
+                        console.log('gen metadata')
+                        genMetaFile(metadata)
+                            .then((metaPath) => {
+                                console.log('upload metadata to ipfs')
 
-                        //         IPFS(metaPath)
-                        //             .then((metaccid) => {
-                        //                 // console.log(`${BASE_URI}${metaccid.IpfsHash}`);
+                                IPFS(metaPath)
+                                    .then((metaccid) => {
+                                        // console.log(`${BASE_URI}${metaccid.IpfsHash}`);
 
-                        //                 console.log('minting...')
-                        //                 createCard('0x72fC6D5f8759f812b8Ae1155A9A8ED4780678EeC')
-                        //                     .then((tx) => {
-                        //                         console.log(tx);
-                        //                     })
+                                        console.log('minting...')
+                                        createCard('0x72fC6D5f8759f812b8Ae1155A9A8ED4780678EeC')
+                                            .then((tx) => {
+                                                console.log(tx);
+                                            })
 
 
-                        //             })
-                        //     }
-                        //     )
+                                    })
+                            }
+                            )
 
 
                     })

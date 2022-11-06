@@ -9,15 +9,16 @@ export default function UploadForm() {
         setImage(event.target.files[0]);
     }
 
-    const uploadToServer = async (event: any) => {
+    const uploadToServer = async (event: any, id: any) => {
         // event.preventDefault();
         const body = new FormData();
         body.append("file", image!);
+        body.append("field", id);
 
         await fetch("/api/mint/uploadImg", {
             method: "POST",
             body
-          });``
+          });
 
     }
 

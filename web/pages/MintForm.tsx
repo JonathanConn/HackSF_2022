@@ -4,18 +4,28 @@ const mintProcess = async (event: any) => {
     event.preventDefault();
 
     const params = JSON.stringify({
-        _name: event.target.name.value,
-        _number: event.target.number.value,
+        name: event.target.name.value,
+        number: event.target.number.value,
     });
     console.log(params)
     try {
-        const res = await fetch(`http://localhost:3000/api/metadata`, {
+       let res = await fetch(`http://localhost:3000/api/metadata`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: params,
         });
-        const data = await res.json();
-        console.log(data);
+
+        const metadata = await res.json();
+        
+        res = await fetch(`http://localhost:3000/api/ipfs`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(metadata),
+            })
+
+
+
+        // console.log(data);
 
     } catch (err) {
         console.log(err);

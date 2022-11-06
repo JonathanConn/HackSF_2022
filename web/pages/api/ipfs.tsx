@@ -1,21 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 var axios = require('axios');
+var FormData = require('form-data');
+var fs = require('fs');
 
 // uploads to ipfs
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResData>) {
 
-    let metadata = {}
-    metadata["hashToPin"] = "QmYJSuQVK52hXfJyTay73gY2MgeEA232srKN4S4HfdSS4i"
-    metadata["pinataMetadata"] = req.body.data
+    const id = req.body.id;
 
-    const data = JSON.stringify(metadata);
+    var data = new FormData();
+    data.append('file', fs.createReadStream(`./${req.body.id}.json`));
+    data.append('pinataOptions', '{"cidVersion": 1}');
+    data.append('pinataMetadata', `{"name": "${req.body.id}.json"}`);
 
     var config = {
         method: 'post',
-        url: 'https://api.pinata.cloud/pinning/pinByHash',
+        url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.PINATA_JWT}`
+            'Authorization': `Bearer ${process.env.PINATA_JWT}`,
+            ...data.getHeaders()
         },
         data: data
     };

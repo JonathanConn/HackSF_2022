@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import NftCard from '../components/NftCard';
+import TopFilter from '../components/TopFilter';
 
 const cards = [{ key: 1, name: 'john abbot' }]
 
@@ -14,6 +15,7 @@ const HomePage = () => {
 
     return (
     <View>
+        <TopFilter />
         <Text>HomePage</Text>
         {/* for each cards in userContactCards, inject NftCard  */}
         {userContactCards.map((card) => {

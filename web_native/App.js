@@ -18,7 +18,7 @@ export default function App() {
 
       </View>
 
-      <Navigation style={styles.navigation} />
+      <Navigation style={[styles.navigation]} />
       <StatusBar style="auto" />
 
     </View>
@@ -26,11 +26,11 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+
   main: {
     overflow: 'auto',
     height: '90%',
     width: '100%',
-    backgroundColor: 'red',
   },
 
   container: {
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   },
 
   navigation: {
+
     height : '10%',
     position: 'fixed',
     bottom: 0,

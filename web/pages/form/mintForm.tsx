@@ -16,8 +16,8 @@ export default function MintForm() {
             data: {
                 name: event.target.name.value,
                 number: event.target.number.value,
+                image: '',
             },
-            image: '',
 
         };
 
@@ -29,7 +29,7 @@ export default function MintForm() {
                 IPFS(pngPath) // server -> ipfs => ipfs ccid
                     .then((pngccid) => {
                         
-                        metadata['image'] = `https://ipfs.io/ipfs/${pngccid.IpfsHash}`;
+                        metadata.data.image = `https://ipfs.io/ipfs/${pngccid.IpfsHash}`;
                         
                         console.log('gen metadata')
                         genMetaFile(metadata)
@@ -96,10 +96,11 @@ export default function MintForm() {
     }
 
     const IPFS = async (filepath: string) => {
+        const name = filepath.substr(0, filepath.lastIndexOf('/') + 1);
         const axios = await fetch(`http://localhost:3000/api/mint/IPFS`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({path: filepath}),
+            body: JSON.stringify({path: filepath, name: name}),
         })
         const data = await axios.json();
         return data;

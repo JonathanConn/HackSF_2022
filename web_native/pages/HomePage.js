@@ -20,7 +20,7 @@ const HomePage = () => {
 
     return (
     <View>
-        <TopFilter />
+        <TopFilter title={"Your Contacts."} showFilter={true}/>
         <ScrollView>
             {/* for each cards in userContactCards, inject NftCard  */}
             {userContactCards.map((card) => {

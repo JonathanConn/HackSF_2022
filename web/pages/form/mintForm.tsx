@@ -23,25 +23,29 @@ export default function MintForm() {
 
         console.log('upload to server')
         uploadToServer(event, id) // server => local filepath
-            .then((filepath) => {
+            .then((pngPath) => {
 
                 console.log('upload to ipfs')
-                imgIPFS(filepath) // server -> ipfs => ipfs ccid
-                    .then((ccid) => {
-
-                        const ipfsCCID = ccid.IpfsHash;
-                        // console.log(`https://ipfs.io/ipfs/${ipfsCCID}`)
-                        metadata['image'] = `https://ipfs.io/ipfs/${ipfsCCID}`;
+                IPFS(pngPath) // server -> ipfs => ipfs ccid
+                    .then((pngccid) => {
                         
+                        metadata['image'] = `https://ipfs.io/ipfs/${pngccid.IpfsHash}`;
+                        
+                        console.log('gen metadata')
                         genMetaFile(metadata)
-                        .then() 
+                        .then( (metaPath) => {
+                                console.log('upload metadata to ipfs')
+
+                                IPFS(metaPath.path)
+                                .then( (metaccid) => {
+                                    console.log(`https://ipfs.io/ipfs/${metaccid.IpfsHash}`);
+                                    
+                                })
+                            }
+                        ) 
 
 
                     })
-                    .finally(
-                        () => {
-                            console.log('done')
-                        })
             })
            
 
@@ -88,10 +92,10 @@ export default function MintForm() {
                 body: JSON.stringify(metadata),
             })
         const data = await res.json();
-        return data;
+        return data.path;
     }
 
-    const imgIPFS = async (filepath: string) => {
+    const IPFS = async (filepath: string) => {
         const axios = await fetch(`http://localhost:3000/api/mint/IPFS`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -41,31 +41,31 @@ export default function MintForm() {
         uploadToServer(event, id) // server => local filepath
             .then((pngPath) => {
 
-                console.log('upload to ipfs')
+                console.log(`upload to ipfs ${pngPath}`)
                 IPFS(pngPath) // server -> ipfs => ipfs ccid
                     .then((pngccid) => {
 
                         metadata.data.image = `${BASE_URI}${pngccid.IpfsHash}`;
 
-                        console.log('gen metadata')
-                        genMetaFile(metadata)
-                            .then((metaPath) => {
-                                console.log('upload metadata to ipfs')
+                        // console.log('gen metadata')
+                        // genMetaFile(metadata)
+                        //     .then((metaPath) => {
+                        //         console.log('upload metadata to ipfs')
 
-                                IPFS(metaPath)
-                                    .then((metaccid) => {
-                                        // console.log(`${BASE_URI}${metaccid.IpfsHash}`);
+                        //         IPFS(metaPath)
+                        //             .then((metaccid) => {
+                        //                 // console.log(`${BASE_URI}${metaccid.IpfsHash}`);
 
-                                        console.log('minting...')
-                                        createCard('0x72fC6D5f8759f812b8Ae1155A9A8ED4780678EeC')
-                                            .then((tx) => {
-                                                console.log(tx);
-                                            })
+                        //                 console.log('minting...')
+                        //                 createCard('0x72fC6D5f8759f812b8Ae1155A9A8ED4780678EeC')
+                        //                     .then((tx) => {
+                        //                         console.log(tx);
+                        //                     })
 
 
-                                    })
-                            }
-                            )
+                        //             })
+                        //     }
+                        //     )
 
 
                     })
@@ -117,14 +117,15 @@ export default function MintForm() {
     }
 
     const IPFS = async (filepath: string) => {
-        const name = filepath.substr(filepath.lastIndexOf('/') + 1, filepath.length);
-        console.log(`name ${name} filepath ${filepath}`)   
-        const axios = await fetch(`/api/mint/subIPFS`, {
+        const name = filepath.substring(filepath.lastIndexOf('/') + 1);
+
+        const axios = await fetch(`api/mint/ipfs`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({}),
+            body: JSON.stringify({name: name, filepath: filepath}),
         })
         const data = await axios.json();
+        console.log(data)
         return data;
     }
 

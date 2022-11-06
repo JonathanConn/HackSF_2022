@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
-import NftCard from '../components/NftCard';
 import Carousel from './Carousel';
 import Pill from '../components/Pill';
 
@@ -31,13 +30,6 @@ const MyCards = ({onCreateHandler, onEditHandler}) => {
             }/>
         </View>
         <Carousel slides={userContactCards} />
-        {/* {userContactCards.map((card) => {
-            return (
-                <View key={card.id} style={styles.card}>
-                    <NftCard contactCard={card}/>
-                </View>
-            )
-        })} */}
     </View>
   );
 }

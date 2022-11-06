@@ -36,7 +36,7 @@ export default function MintForm() {
                         .then( (metaPath) => {
                                 console.log('upload metadata to ipfs')
 
-                                IPFS(metaPath.path)
+                                IPFS(metaPath)
                                 .then( (metaccid) => {
                                     console.log(`https://ipfs.io/ipfs/${metaccid.IpfsHash}`);
                                     

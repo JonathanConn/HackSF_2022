@@ -4,27 +4,35 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
-import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract Card is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
-
-    uint internal level; // level of card
-    string internal contactInfo; // stores contract info json
+contract Card is ERC1155, Ownable, ERC1155Burnable {
     
-    mapping (uint => string) public cardToLevelURI;
+    uint256 public constant social = 0;
+    uint256 public constant profesional = 1;
+    uint256 public constant experience = 2;
 
-    constructor(string memory _contactInfo) ERC1155("") {
-        level = 0;
-        contactInfo = _contactInfo;
+    string public baseURI;
+
+    constructor(address owner, string memory _baseURI) ERC1155("") {
+        baseURI = _baseURI;
+        
+        _setURI(_baseURI);
+
+        _mint(owner, social, 1, "");
+        _mint(owner, profesional, 1, "");
+        _mint(owner, experience, 1, "");
     }
 
-    function upgradeLevel() internal {
-        level++;
-        _setURI(cardToLevelURI[level]);
-    }
-
-    function updateContact(string memory _contactInfo) public onlyOwner {
-        contactInfo = _contactInfo;
+    // ipfs://#/{personID}/{typeID}.json
+    function uri(uint256 typeId) override public view returns (string memory) {
+        return string(
+                abi.encodePacked(
+                    baseURI,
+                    Strings.toString(typeId),
+                    ".json"
+                )
+            );
     }
 
     function mint(
@@ -34,26 +42,5 @@ contract Card is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         bytes memory data
     ) public onlyOwner {
         _mint(account, id, amount, data);
-    }
-
-    function mintBatch(
-        address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        bytes memory data
-    ) public onlyOwner {
-        _mintBatch(to, ids, amounts, data);
-    }
-
-    // The following functions are overrides required by Solidity.
-    function _beforeTokenTransfer(
-        address operator,
-        address from,
-        address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        bytes memory data
-    ) internal override(ERC1155, ERC1155Supply) {
-        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
     }
 }

@@ -11,7 +11,18 @@ export default async function handler(req: any, res: NextApiResponse) {
         fs.rmSync(directory, { recursive: true })
     } catch (e) {};
     fs.mkdirSync(directory);
-    return res.status(200)
+    fs.mkdirSync(`${directory}/meta`);
+    fs.mkdirSync(`${directory}/img`);
+
+
+    fs.writeFileSync(`${directory}/contact.json`, JSON.stringify({}))
+
+    for (var i = 0; i < 3; i++) {
+        fs.writeFileSync(`${directory}/meta/${i}.json`, JSON.stringify({test: 'testdata'}))
+        fs.writeFileSync(`${directory}/img/${i}.png`, '')
+    }
+
+    return res.status(200).send('done');
    
    
 };

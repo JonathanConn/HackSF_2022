@@ -2,7 +2,7 @@ import styles from '../../styles/Home.module.css'
 var crypto = require("crypto");
 import { useState } from "react";
 
-const BASE_URI = 'https://invaders.mypinata.cloud/ipfs/'
+const BASE_URI = 'https://hndshk.mypinata.cloud/ipfs/'
 
 export default function MintForm() {
     const [image, setImage] = useState<File>();
@@ -15,46 +15,73 @@ export default function MintForm() {
         let metadata = {
             id: id,
             data: {
-                name: event.target.name.value,
-                number: event.target.number.value,
+                addr: event.target.addr.value,
                 image: '',
+                contact: '',
             },
-
         };
 
-        console.log('upload to server')
-        uploadToServer(event, id) // server => local filepath
-            .then((pngPath) => {
+        await fetch('/api/utils/resetUploads', {
+            method: 'POST',
+        });
 
-                console.log('upload to ipfs')
-                IPFS(pngPath) // server -> ipfs => ipfs ccid
-                    .then((pngccid) => {
+        // handleContact(metadata)
+        // .then ( (data) => {
+        //     metadata.data.contact = data.contactpath;
 
-                        metadata.data.image = `${BASE_URI}${pngccid.IpfsHash}`;
+        //     // need to upload to ifps after completion 
+        //     if (data.tx) {
 
-                        console.log('gen metadata')
-                        genMetaFile(metadata)
-                            .then((metaPath) => {
-                                console.log('upload metadata to ipfs')
-
-                                IPFS(metaPath)
-                                    .then((metaccid) => {
-                                        // console.log(`${BASE_URI}${metaccid.IpfsHash}`);
-
-                                        console.log('minting...')
-                                        createCard('0x72fC6D5f8759f812b8Ae1155A9A8ED4780678EeC')
-                                            .then((tx) => {
-                                                console.log(tx);
-                                            })
+        //     } 
 
 
-                                    })
-                            }
-                            )
+        // })
+        
+
+        // console.log('upload to server')
+        // uploadToServer(event, id) // server => local filepath
+        //     .then((pngPath) => {
+
+        //         console.log('upload to ipfs')
+        //         IPFS(pngPath) // server -> ipfs => ipfs ccid
+        //             .then((pngccid) => {
+
+        //                 // metadata.data.image = `${BASE_URI}${pngccid.IpfsHash}`;
+
+        //                 // console.log('gen metadata')
+        //                 // genMetaFile(metadata)
+        //                 //     .then((metaPath) => {
+        //                 //         console.log('upload metadata to ipfs')
+
+        //                 //         IPFS(metaPath)
+        //                 //             .then((metaccid) => {
+        //                 //                 // console.log(`${BASE_URI}${metaccid.IpfsHash}`);
+
+        //                 //                 console.log('minting...')
+        //                 //                 createCard('0x72fC6D5f8759f812b8Ae1155A9A8ED4780678EeC')
+        //                 //                     .then((tx) => {
+        //                 //                         console.log(tx);
+        //                 //                     })
 
 
-                    })
-            })
+        //                 //             })
+        //                 //     }
+        //                 //     )
+
+
+        //             })
+        //     })
+    }
+
+    const handleContact = async (metadata: any) => {
+        const res = await fetch('/api/utils/handleContact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(metadata),
+        })
+
+        const data = await res.json();
+        return data.contactpath;
     }
 
     const createCard = async (addr: string) => {
@@ -65,7 +92,7 @@ export default function MintForm() {
         })
 
         const data = await res.json();
-        return data;
+        return data.tx;
     }
 
     const updateURI = async (uri: string) => {
@@ -79,7 +106,7 @@ export default function MintForm() {
         return data;
     }
 
-    
+
     const genMetaFile = async (metadata: any) => {
         const res = await fetch(`api/utils/writeMeta`, {
             method: 'POST',
@@ -124,8 +151,7 @@ export default function MintForm() {
     return (
 
         <form onSubmit={mintProcess}>
-            <input id="name" type="text" placeholder="Name" className={styles.card}></input><br></br>
-            <input id="number" type="text" placeholder="Phone #" className={styles.card}></input><br></br>
+            <input id="addr" type="text" placeholder="Address" className={styles.card}></input><br></br>
             <input id="images" type="file" onChange={uploadToClient} className={styles.card} />
             <button className={styles.center}>Mint</button>
         </form>

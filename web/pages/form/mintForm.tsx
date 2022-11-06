@@ -34,8 +34,8 @@ export default function MintForm() {
         // })
 
 
-      
-        
+
+
 
         console.log('upload to server')
         uploadToServer(event, id) // server => local filepath
@@ -80,7 +80,7 @@ export default function MintForm() {
         })
 
         const data = await res.json();
-        return data 
+        return data
     }
 
     const createCard = async (addr: string) => {
@@ -122,7 +122,7 @@ export default function MintForm() {
         const axios = await fetch(`api/mint/ipfs`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({name: name, filepath: filepath}),
+            body: JSON.stringify({ name: name, filepath: filepath }),
         })
         const data = await axios.json();
         console.log(data)
@@ -150,13 +150,14 @@ export default function MintForm() {
 
 
     return (
-
-        <form onSubmit={mintProcess}>
-            <input id="addr" type="text" placeholder="Address" className={styles.card}></input><br></br>
-            <input id="images" type="file" onChange={uploadToClient} className={styles.card} />
-            <button className={styles.center}>Mint</button>
-        </form>
-
+        <div>
+            <form onSubmit={mintProcess}>
+                <input id="addr" type="text" placeholder="Address" className={styles.card}></input><br></br>
+                <input id="images" type="file" onChange={uploadToClient} className={styles.card} />
+                <button className={styles.center}>Mint</button>
+            </form>
+  
+        </div>
     )
 }
 

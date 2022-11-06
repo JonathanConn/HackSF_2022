@@ -13,11 +13,13 @@ contract Card is ERC1155, Ownable, ERC1155Burnable {
     uint256 public constant experience = 2;
 
     string public baseURI;
+    uint public cardID;
 
-    constructor(address owner, string memory _baseURI) ERC1155("") {
+    constructor(address owner, string memory _baseURI, uint _cardID) ERC1155("") {
         baseURI = _baseURI;
-        
-        _setURI(_baseURI);
+        cardID = _cardID;
+
+        _setURI(_baseURI); 
 
         _mint(owner, social, 1, "");
         _mint(owner, profesional, 1, "");
@@ -29,10 +31,22 @@ contract Card is ERC1155, Ownable, ERC1155Burnable {
         return string(
                 abi.encodePacked(
                     baseURI,
+                    Strings.toString(cardID),
+                    "/",
                     Strings.toString(typeId),
                     ".json"
                 )
             );
+    }
+
+    function contacturi() public view returns (string memory) {
+        return string(
+            abi.encodePacked(
+                    baseURI,
+                    Strings.toString(cardID),
+                    "/contact.json"
+                )
+        );
     }
 
     function mint(

@@ -1,13 +1,18 @@
 import { ethers } from "hardhat";
 
+require('dotenv').config();
+const { API_URL, PRIVATE_KEY } = process.env;
+
 async function main() {
 
-  const Card = await ethers.getContractFactory("Card");
-  const card = await Card.deploy('{"name":"bob"}');
+  const me = new ethers.Wallet(PRIVATE_KEY!, ethers.provider);
+  const cardFactory = await ethers.getContractFactory("CardFactory", {
+    signer: me,
+  });
+  const deployedFact = await cardFactory.deploy();
+  await deployedFact.deployed();
 
-  await card.deployed();
-
-  console.log(`Deployed to ${card.address}`);
+  console.log(`Deployed to ${deployedFact.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

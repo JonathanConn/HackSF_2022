@@ -10,6 +10,9 @@ import {
 
 export default function App() {
   const [pageName, setPageName] = useState('home');
+  // handleCallback = (childData) =>{
+  //     this.setState({name: childData})
+  // }
 
   return (
     <View style={styles.container}>
@@ -19,7 +22,7 @@ export default function App() {
 
       </View>
 
-      <Navigation style={[styles.navigation]} />
+      <Navigation style={[styles.navigation]} parentCallBack={this.handleCallBack}/>
       <StatusBar style="auto" />
 
     </View>

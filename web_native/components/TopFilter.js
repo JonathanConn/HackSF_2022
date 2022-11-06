@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import NotificationIcon from '../assets/Front End Materials 1/NotificationIcon';
-import HasNewNotificationIcon from '../assets/Front End Materials 1/HasNewNotificationIcon';
+import NotificationIcon from '../assets/Front_End_Materials_1/NotificationIcon';
+import HasNewNotificationIcon from '../assets/Front_End_Materials_1/HasNewNotificationIcon';
 
 const TopFilter = () => {
     const [hasNewNotification, setHasNewNotification] = useState(false);

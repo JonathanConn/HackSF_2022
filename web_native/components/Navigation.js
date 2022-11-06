@@ -1,9 +1,9 @@
 import { React } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import ConnectNonSelectedIcon from '../assets/Front End Materials 1/ConnectNonSelectedIcon';
-import HomeIcon from '../assets/Front End Materials 1/HomeIcon';
-import MyCardsIcon from '../assets/Front End Materials 1/MyCardsIcon';
-import MapIcon from '../assets/Front End Materials 1/MapIcon';
+import ConnectNonSelectedIcon from '../assets/Front_End_Materials_1/ConnectNonSelectedIcon';
+import HomeIcon from '../assets/Front_End_Materials_1/HomeIcon';
+import MyCardsIcon from '../assets/Front_End_Materials_1/MyCardsIcon';
+import MapIcon from '../assets/Front_End_Materials_1/MapIcon';
 
 const Navigation = () => {
     const changePage = (pageName) => {

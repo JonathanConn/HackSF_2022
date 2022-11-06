@@ -1,8 +1,8 @@
 import { React } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import TelegramIcon from '../assets/Front End Materials 2/TelegramIcon';
-import InstagramIcon from '../assets/Front End Materials 2/InstagramIcon';
-import OtherLinkIcon from '../assets/Front End Materials 2/OtherLinkIcon';
+import TelegramIcon from '../assets/Front_End_Materials_2/TelegramIcon';
+import InstagramIcon from '../assets/Front_End_Materials_2/InstagramIcon';
+import OtherLinkIcon from '../assets/Front_End_Materials_2/OtherLinkIcon';
 
 const NftCard = ({contactCard}) => {
 
@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
     },
 
     socialIcon: {
-        color: 'grey',
         margin: 5,
     }
 

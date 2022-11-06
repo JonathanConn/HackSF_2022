@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import HomePage from './pages/HomePage';
+import { useState } from 'react';
 import Navigation from './components/Navigation';
 import { 
   StyleSheet, 
@@ -8,7 +9,7 @@ import {
 
 
 export default function App() {
-  
+  const [pageName, setPageName] = useState('home');
 
   return (
     <View style={styles.container}>
@@ -28,7 +29,7 @@ export default function App() {
 const styles = StyleSheet.create({
 
   main: {
-    overflow: 'auto',
+    overflow: 'hidden',
     height: '90%',
     width: '100%',
   },

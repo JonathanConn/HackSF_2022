@@ -2,6 +2,7 @@ import styles from '../../styles/Home.module.css'
 var crypto = require("crypto");
 import { useState } from "react";
 
+const BASE_URI = 'https://invaders.mypinata.cloud/ipfs/'
 
 export default function MintForm() {
     const [image, setImage] = useState<File>();
@@ -29,7 +30,7 @@ export default function MintForm() {
                 IPFS(pngPath) // server -> ipfs => ipfs ccid
                     .then((pngccid) => {
                         
-                        metadata.data.image = `https://ipfs.io/ipfs/${pngccid.IpfsHash}`;
+                        metadata.data.image = `${BASE_URI}${pngccid.IpfsHash}`;
                         
                         console.log('gen metadata')
                         genMetaFile(metadata)
@@ -38,7 +39,7 @@ export default function MintForm() {
 
                                 IPFS(metaPath)
                                 .then( (metaccid) => {
-                                    console.log(`https://ipfs.io/ipfs/${metaccid.IpfsHash}`);
+                                    console.log(`${BASE_URI}${metaccid.IpfsHash}`);
                                     
                                 })
                             }

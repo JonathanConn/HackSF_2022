@@ -1,17 +1,20 @@
 import { React, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Pressable, StyleSheet, ScrollView, Text } from 'react-native';
 import NftCard from '../components/NftCard';
 import TopFilter from '../components/TopFilter';
+import AppHeader from '../components/AppHeader';
+import CardDetails from '../components/CardDetails';
 
 const cards = [
-    { id: 1, name: 'john abbot', ens: 'johnabbot.eth', type: 'social', socials: ['telegram', 'instagram', 'www.link.com'], nftImageUrl: "https://cdn.discordapp.com/attachments/1038280454656249918/1038584736056082442/Derek_Scott_preview.png", contactLevel: 1 },
-    { id: 2, name: 'john abbot', ens: 'johnabbot.eth', type: 'social', socials: ['telegram', 'instagram'], nftImageUrl: "https://cdn.discordapp.com/attachments/1038280454656249918/1038584736056082442/Derek_Scott_preview.png", contactLevel: 2 },
-    { id: 3, name: 'john abbot', ens: 'johnabbot.eth', type: 'social', socials: ['telegram', 'instagram'], nftImageUrl: "https://cdn.discordapp.com/attachments/1038280454656249918/1038584736056082442/Derek_Scott_preview.png", contactLevel: 3 },
-    { id: 4, name: 'john abbot', ens: 'johnabbot.eth', type: 'social', socials: ['telegram', 'instagram'], nftImageUrl: "https://cdn.discordapp.com/attachments/1038280454656249918/1038584736056082442/Derek_Scott_preview.png", contactLevel: 1 },
+    { id: 1, name: 'John Abbot', ens: 'johnabbot.eth', type: 'Experience', socials: ['telegram', 'instagram', 'www.link.com'], nftImageUrl: "https://cdn.discordapp.com/attachments/1038280454656249918/1038584736056082442/Derek_Scott_preview.png", contactLevel: 1 },
+    { id: 2, name: 'John Abbot', ens: 'johnabbot.eth', type: 'Professional', socials: ['telegram', 'instagram'], nftImageUrl: "https://cdn.discordapp.com/attachments/1038280454656249918/1038584736056082442/Derek_Scott_preview.png", contactLevel: 2 },
+    { id: 3, name: 'John Abbot', ens: 'johnabbot.eth', type: 'Social', socials: ['telegram', 'instagram'], nftImageUrl: "https://cdn.discordapp.com/attachments/1038280454656249918/1038584736056082442/Derek_Scott_preview.png", contactLevel: 3 },
 ]
 
 const HomePage = () => {
     const [userContactCards, setUserContactCards] = useState([])
+
+    const [selectedCard, setSelectedCard] = useState(null)
 
     // TODO: fetch cards
     useEffect(() => {
@@ -19,30 +22,45 @@ const HomePage = () => {
     }, [])
 
     return (
-    <View >
-        <TopFilter title={"Your Contacts."} showFilter={true}/>
-        <ScrollView style={styles.cardContainer}>
-            {/* for each cards in userContactCards, inject NftCard  */}
-            {userContactCards.map((card) => {
-                return (
-                    <View key={card.id} style={styles.card}>
-                        <NftCard contactCard={card}/>
-                    </View>
-                )
-            })}
+    <View style={styles.container}>
+        {selectedCard == null ?
+        <TopFilter style={styles.topNav}/> :
+        <AppHeader title={"Your Contacts."} extension={
+            <Pressable style={styles.row} onPress={() => setSelectedCard(null)}>
+                <Text>Logo</Text>
+                <Text style={styles.backButton}>Back</Text>
+            </Pressable>
+        }/>
+        }
+        
+        <ScrollView>
+            
+            {
+            selectedCard == null ?
+                userContactCards.map((card) => {
+                    return (
+                        <Pressable key={card.id} onPress={() => { setSelectedCard(card) }}>
+                            <NftCard contactCard={card} showDetails={ false }/>
+                        </Pressable>
+                    )
+                }) :
+                <CardDetails contactCard={selectedCard}/>
+            }   
         </ScrollView>
     </View>
     );
 }
 
-
 const styles = StyleSheet.create({
-    cardContainer: {
-        padding: 16,
+    container: {
+        height: '100%',
     },
-    card: {
-        marginVertical: 16,
-
+    topNav: {
+        width: '100%', 
+        flexGrow: 0,
+    },
+    row: {
+        flexDirection: 'row',
     }
 
   });

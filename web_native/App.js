@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import { 
   StyleSheet, 
   View, 
+  Dimensions,
 } from 'react-native';
 import MapPage from './pages/MapPage';
 import MyCardsPage from './pages/MyCardsPage';
@@ -13,6 +14,7 @@ import HndshkPage from './pages/HndshkPage';
 
 export default function App() {
   const [pageName, setPageName] = useState('Home');
+
   const changePage = (pageName) =>{
       setPageName(pageName);
   }
@@ -31,35 +33,29 @@ export default function App() {
 
       </View>
 
-      <Navigation style={[styles.navigation]} changePage={changePage} activePage={pageName}/>
-      <StatusBar style="auto" />
+      <Navigation style={styles.navigation} changePage={changePage} activePage={pageName}/>
 
     </View>
   );
 }
 
+const windowHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
-
-  main: {
-    flex: 9,
-    overflow: 'hidden',
-    // height: '90%',
-    width: '100%',
-  },
-
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    
+    position: 'relative',
+    paddingBottom: 100,
   },
+  main: {
 
+  },
   navigation: {
-    flex: 1,
-    // height : '10%',
     position: 'fixed',
+    left: 0,
     bottom: 0,
+    width: '100%',
+    
+    
   }
 
 });

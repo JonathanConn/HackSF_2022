@@ -22,12 +22,17 @@ const Navigation = ({ changePage, activePage }) => {
 const styles = StyleSheet.create({
     
     container: {
-        borderTopColor: 'grey',
-        borderTopWidth: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
+
+        backgroundColor: '#fff',
+        shadowColor: '#171717',
+        shadowOffset: {width: 0, height: -4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        zIndex: 100,
 
     },
 

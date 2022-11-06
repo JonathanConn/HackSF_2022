@@ -5,7 +5,7 @@ var fs = require('fs');
 export default async function handler(req: NextApiRequest, res: NextApiResponse) { // returns filename
     try {
         fs.writeFileSync(`./public/uploads/${req.body.id}.json`, JSON.stringify(req.body.data))
-        return res.status(200)
+        return res.status(200).json({path: `./public/uploads/${req.body.id}.json`});
     }
     catch (e) {
         console.log(e)

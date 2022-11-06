@@ -29,79 +29,73 @@ export default function MintForm() {
                 console.log('upload to ipfs')
                 IPFS(pngPath) // server -> ipfs => ipfs ccid
                     .then((pngccid) => {
-                        
+
                         metadata.data.image = `${BASE_URI}${pngccid.IpfsHash}`;
-                        
+
                         console.log('gen metadata')
                         genMetaFile(metadata)
-                        .then( (metaPath) => {
+                            .then((metaPath) => {
                                 console.log('upload metadata to ipfs')
 
                                 IPFS(metaPath)
-                                .then( (metaccid) => {
-                                    console.log(`${BASE_URI}${metaccid.IpfsHash}`);
-                                    
-                                })
+                                    .then((metaccid) => {
+                                        // console.log(`${BASE_URI}${metaccid.IpfsHash}`);
+
+                                        console.log('minting...')
+                                        createCard('0x72fC6D5f8759f812b8Ae1155A9A8ED4780678EeC')
+                                            .then((tx) => {
+                                                console.log(tx);
+                                            })
+
+
+                                    })
                             }
-                        ) 
+                            )
 
 
                     })
             })
-           
-
-
-        // console.log(event.target.images);
-        // nft image
-        // fetch(`http://localhost:3000/api/writeImg`, {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(imgdata),
-        // })
-        //     .then(() => {
-        //         // fetch(`http://localhost:3000/api/ipfs`, {
-        //         //     method: 'POST',
-        //         //     headers: { 'Content-Type': 'application/json' },
-        //         //     body: JSON.stringify(imgdata),
-        //         // })
-        //     })
-        //     .then(() => {
-
-        // nft metadata
-        // fetch(`http://localhost:3000/api/utils/writeMeta`, {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(metadata),
-        // })
-        //     .then(() => {
-        //         fetch(`http://localhost:3000/api/mint/IFPS`, { // upload metadata to ipfs
-        //             method: 'POST',
-        //             headers: { 'Content-Type': 'application/json' },
-        //             body: JSON.stringify(metadata),
-        //         })
-        //     })
-
-        //     // })
-        //     .catch((e) => { console.log(e) });
-
     }
 
+    const createCard = async (addr: string) => {
+        const res = await fetch('/api/mint/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ addr: addr }),
+        })
+
+        const data = await res.json();
+        return data;
+    }
+
+    const updateURI = async (uri: string) => {
+        const res = await fetch('/api/mint/baseURI', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ uri: uri }),
+        })
+
+        const data = await res.json();
+        return data;
+    }
+
+    
     const genMetaFile = async (metadata: any) => {
-        const res = await fetch(`http://localhost:3000/api/utils/writeMeta`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(metadata),
-            })
+        const res = await fetch(`api/utils/writeMeta`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(metadata),
+        })
         const data = await res.json();
         return data.path;
     }
 
     const IPFS = async (filepath: string) => {
         const name = filepath.substr(0, filepath.lastIndexOf('/') + 1);
-        const axios = await fetch(`http://localhost:3000/api/mint/IPFS`, {
+        const axios = await fetch(`/api/mint/IPFS`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({path: filepath, name: name}),
+            body: JSON.stringify({ path: filepath, name: name }),
         })
         const data = await axios.json();
         return data;
@@ -120,7 +114,7 @@ export default function MintForm() {
             method: "POST",
             body
         });
-        
+
         const data = await filepath.json();
         return data.path;
 

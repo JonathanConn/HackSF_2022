@@ -38,8 +38,8 @@ contract CardFactory is Ownable {
             ));
     }
 
-    function getCard(address person) public view returns (address) {
-        return personToCard[person];
+    function _setURI(string memory _baseURI) public onlyOwner {
+        baseURI = _baseURI;
     }
 
 }

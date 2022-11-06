@@ -5,7 +5,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const NftCard = (contactCard) => {
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text>Card of {contactCard.name}</Text>
 
 
@@ -15,7 +15,11 @@ const NftCard = (contactCard) => {
 
 
 const styles = StyleSheet.create({
-    
+    container: {
+        width: '100%',
+        height: 300,
+        backgroundColor: 'grey',
+    }
 
   });
 

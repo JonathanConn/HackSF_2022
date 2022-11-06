@@ -9,6 +9,7 @@ import {
 import MapPage from './pages/MapPage';
 import MyCardsPage from './pages/MyCardsPage';
 import HndshkPage from './pages/HndshkPage';
+import ConnectWalletPage from './pages/ConnectWalletPage';
 
 
 export default function App() {
@@ -16,10 +17,26 @@ export default function App() {
   const changePage = (pageName) =>{
       setPageName(pageName);
   }
+  const[walletScreen, setWalletScreen] = useState(true);
+
+  function onClickWalletHandler() {
+    //connect to wallet
+    // add a conditional if successfully connected to wallet
+    console.log("imm her")
+    setWalletScreen(false);
+  }
 
   return (
     <View style={styles.container}>
-      
+      {walletScreen &&
+      <View>
+        <ConnectWalletPage 
+          style={styles.walletPage}
+          onClick = {() => { setWalletScreen(false) }}
+        />
+      </View>
+      }
+      {!walletScreen &&
       <View style={styles.main}>
         {
           pageName == "Home" ? <HomePage /> : 
@@ -28,17 +45,24 @@ export default function App() {
           pageName == "Map" ? <MapPage /> :
           null
         }
-
-      </View>
-
-      <Navigation style={[styles.navigation]} changePage={changePage}/>
-      <StatusBar style="auto" />
+      </View>}
+      {!walletScreen &&
+      <Navigation style={[styles.navigation]} changePage={changePage}/>}
+      {!walletScreen &&
+      <StatusBar style="auto" />}
+      
 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  walletPage: {
+    width: '100%',
+    height: '100%',
+    
+    backgroundColor:'#F8F8F8',
+  },
 
   main: {
     overflow: 'hidden',
@@ -49,7 +73,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
     
   },

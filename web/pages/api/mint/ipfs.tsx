@@ -5,8 +5,8 @@ var fs = require('fs');
 
 // uploads to ipfs
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const filename = `.req.body.filename}`;
-    
+    const filename = `${req.body.filename}`;
+
     var data = new FormData();
     data.append('file', fs.createReadStream(filename));
     data.append('pinataOptions', '{"cidVersion": 1}');

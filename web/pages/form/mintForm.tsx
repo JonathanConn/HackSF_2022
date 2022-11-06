@@ -21,56 +21,55 @@ export default function MintForm() {
             },
         };
 
-        await fetch('/api/utils/resetUploads', {
-            method: 'POST',
-        });
+        // await fetch('/api/utils/resetUploads', {
+        //     method: 'POST',
+        // }).then( () => {
 
-        // handleContact(metadata)
-        // .then ( (data) => {
-        //     metadata.data.contact = data.contactpath;
-
-        //     // need to upload to ifps after completion 
-        //     if (data.tx) {
-
-        //     } 
-
+        //     // handleContact(metadata)
+        //     // .then ( (data) => {
+        //     //     metadata.data.contact = data.uri;
+        //     //     // console.log(`here ${data.uri}`);
+        //     // })
 
         // })
+
+
+      
         
 
-        // console.log('upload to server')
-        // uploadToServer(event, id) // server => local filepath
-        //     .then((pngPath) => {
+        console.log('upload to server')
+        uploadToServer(event, id) // server => local filepath
+            .then((pngPath) => {
 
-        //         console.log('upload to ipfs')
-        //         IPFS(pngPath) // server -> ipfs => ipfs ccid
-        //             .then((pngccid) => {
+                console.log('upload to ipfs')
+                IPFS(pngPath) // server -> ipfs => ipfs ccid
+                    .then((pngccid) => {
 
-        //                 // metadata.data.image = `${BASE_URI}${pngccid.IpfsHash}`;
+                        metadata.data.image = `${BASE_URI}${pngccid.IpfsHash}`;
 
-        //                 // console.log('gen metadata')
-        //                 // genMetaFile(metadata)
-        //                 //     .then((metaPath) => {
-        //                 //         console.log('upload metadata to ipfs')
+                        console.log('gen metadata')
+                        genMetaFile(metadata)
+                            .then((metaPath) => {
+                                console.log('upload metadata to ipfs')
 
-        //                 //         IPFS(metaPath)
-        //                 //             .then((metaccid) => {
-        //                 //                 // console.log(`${BASE_URI}${metaccid.IpfsHash}`);
+                                IPFS(metaPath)
+                                    .then((metaccid) => {
+                                        // console.log(`${BASE_URI}${metaccid.IpfsHash}`);
 
-        //                 //                 console.log('minting...')
-        //                 //                 createCard('0x72fC6D5f8759f812b8Ae1155A9A8ED4780678EeC')
-        //                 //                     .then((tx) => {
-        //                 //                         console.log(tx);
-        //                 //                     })
-
-
-        //                 //             })
-        //                 //     }
-        //                 //     )
+                                        console.log('minting...')
+                                        createCard('0x72fC6D5f8759f812b8Ae1155A9A8ED4780678EeC')
+                                            .then((tx) => {
+                                                console.log(tx);
+                                            })
 
 
-        //             })
-        //     })
+                                    })
+                            }
+                            )
+
+
+                    })
+            })
     }
 
     const handleContact = async (metadata: any) => {
@@ -81,7 +80,7 @@ export default function MintForm() {
         })
 
         const data = await res.json();
-        return data.contactpath;
+        return data 
     }
 
     const createCard = async (addr: string) => {
@@ -118,11 +117,12 @@ export default function MintForm() {
     }
 
     const IPFS = async (filepath: string) => {
-        const name = filepath.substr(0, filepath.lastIndexOf('/') + 1);
-        const axios = await fetch(`/api/mint/IPFS`, {
+        const name = filepath.substr(filepath.lastIndexOf('/') + 1, filepath.length);
+        console.log(`name ${name} filepath ${filepath}`)   
+        const axios = await fetch(`/api/mint/subIPFS`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ path: filepath, name: name }),
+            body: JSON.stringify({}),
         })
         const data = await axios.json();
         return data;

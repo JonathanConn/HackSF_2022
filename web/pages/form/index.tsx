@@ -11,9 +11,9 @@ export default function Form() {
                 <div className={styles.grid}>
                     <MintForm /> 
                 </div>
-                <div className={styles.grid}>
+                {/* <div className={styles.grid}>
                     <UploadForm />
-                </div>
+                </div> */}
             </div>
         </main>
 

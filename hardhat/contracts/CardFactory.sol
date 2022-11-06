@@ -23,7 +23,7 @@ contract CardFactory is Ownable {
         uint256 newTokenId = _tokenIds.current();
 
         string memory tempURI = _newURI();
-        Card card = new Card(person, tempURI);
+        Card card = new Card(person, tempURI, newTokenId);
         card.transferOwnership(person);
 
         personToCard[person] = address(card);
@@ -34,8 +34,7 @@ contract CardFactory is Ownable {
         return string(
             abi.encodePacked(
                 baseURI, 
-                Strings.toString(_tokenIds.current()), 
-                "/{id}.json"
+                "/"
             ));
     }
 

@@ -18,8 +18,8 @@ const ConnectNonSelectedIcon = ({selected}) => (
       stroke={selected ? "#8ABCFE" : "#000" }
       strokeWidth={2}
     />
-    <Circle cx={8.17} cy={5.705} r={4.252} stroke="#000" strokeWidth={2} />
-    <Circle cx={18.803} cy={5.705} r={4.252} stroke="#000" strokeWidth={2} />
+    <Circle cx={8.17} cy={5.705} r={4.252} stroke={selected ? "#8ABCFE" : "#000" } strokeWidth={2} />
+    <Circle cx={18.803} cy={5.705} r={4.252} stroke={selected ? "#8ABCFE" : "#000" } strokeWidth={2} />
   </Svg>
 )
 

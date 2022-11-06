@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import NotificationIcon from '../assets/Front_End_Materials_1/NotificationIcon';
 import HasNewNotificationIcon from '../assets/Front_End_Materials_1/HasNewNotificationIcon';
+import { Pill } from './Pill';
 
 const TopFilter = (props) => {
     const [hasNewNotification, setHasNewNotification] = useState(false);
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     container: {
         borderBottomColor: 'grey',
         borderBottomWidth: 1,
-        position: 'fixed',
+        position: 'sticky',
         top: 0,
         zIndex: 1,
         width: '100%',
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
         borderColor: 'blue',
         borderWidth: 1,
     },
+
     filterOptions: {
 
     },

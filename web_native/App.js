@@ -12,7 +12,7 @@ import HndshkPage from './pages/HndshkPage';
 
 
 export default function App() {
-  const [pageName, setPageName] = useState('home');
+  const [pageName, setPageName] = useState('Home');
   const changePage = (pageName) =>{
       setPageName(pageName);
   }
@@ -31,7 +31,7 @@ export default function App() {
 
       </View>
 
-      <Navigation style={[styles.navigation]} changePage={changePage}/>
+      <Navigation style={[styles.navigation]} changePage={changePage} activePage={pageName}/>
       <StatusBar style="auto" />
 
     </View>
@@ -41,8 +41,9 @@ export default function App() {
 const styles = StyleSheet.create({
 
   main: {
+    flex: 9,
     overflow: 'hidden',
-    height: '90%',
+    // height: '90%',
     width: '100%',
   },
 
@@ -55,8 +56,8 @@ const styles = StyleSheet.create({
   },
 
   navigation: {
-
-    height : '10%',
+    flex: 1,
+    // height : '10%',
     position: 'fixed',
     bottom: 0,
   }

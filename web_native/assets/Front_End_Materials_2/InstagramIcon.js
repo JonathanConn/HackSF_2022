@@ -5,7 +5,7 @@ const InstagramIcon = ({color}) => (
   <Svg
     width={40}
     height={40}
-    fill="none"
+    fill="white"
     xmlns="http://www.w3.org/2000/svg"
   >
     <Path

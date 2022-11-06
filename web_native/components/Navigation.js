@@ -5,15 +5,15 @@ import HomeIcon from '../assets/Front_End_Materials_1/HomeIcon';
 import MyCardsIcon from '../assets/Front_End_Materials_1/MyCardsIcon';
 import MapIcon from '../assets/Front_End_Materials_1/MapIcon';
 
-const Navigation = ({ changePage }) => {
+const Navigation = ({ changePage, activePage }) => {
 
 
     return (
     <View style={ styles.container }>
-        <Pressable style={ styles.navLink } onPress={() => changePage("Home")}><HomeIcon selected={true} /></Pressable>
-        <Pressable style={ styles.navLink } onPress={() => changePage("MyCards")}><MyCardsIcon selected={false} /></Pressable>
-        <Pressable style={ styles.navLink } onPress={() => changePage("Hndshk")}><ConnectNonSelectedIcon selected={false}/></Pressable>
-        <Pressable style={ styles.navLink } onPress={() => changePage("Map")}><MapIcon selected={false}/></Pressable>
+        <Pressable style={ [styles.navLink, activePage? styles.active : styles.unactive] } onPress={() => changePage("Home")}><HomeIcon selected={activePage == "Home"} /></Pressable>
+        <Pressable style={ [styles.navLink, activePage? styles.active : styles.unactive] } onPress={() => changePage("MyCards")}><MyCardsIcon selected={activePage == "MyCards"} /></Pressable>
+        <Pressable style={ [styles.navLink, activePage? styles.active : styles.unactive] } onPress={() => changePage("Hndshk")}><ConnectNonSelectedIcon selected={activePage == "Hndshk"}/></Pressable>
+        <Pressable style={ [styles.navLink, activePage? styles.active : styles.unactive] } onPress={() => changePage("Map")}><MapIcon selected={activePage == "Map"}/></Pressable>
     </View>
     );
 }
@@ -22,22 +22,21 @@ const Navigation = ({ changePage }) => {
 const styles = StyleSheet.create({
     
     container: {
-        paddingTop: 10,
         borderTopColor: 'grey',
         borderTopWidth: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
-        height: 40,
+
     },
 
     navLink: {
+        paddingVertical: 10,
         width: '25%',
         display: 'flex',
         justifyContent: 'center', 
         alignItems: 'center',
-        
     }
 
   });

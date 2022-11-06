@@ -1,0 +1,22 @@
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="27" cy="27" r="26" fill="#C7ACFE" stroke="black" stroke-width="2"/>
+<rect x="26" y="34" width="4" height="18" fill="#AFDA9A"/>
+<rect x="26.2205" y="7.56909" width="8.14806" height="6.62701" rx="3.3135" transform="rotate(7.07123 26.2205 7.56909)" fill="#FF9F76"/>
+<rect x="35.0293" y="9.07788" width="8.14806" height="6.55619" rx="3.27809" transform="rotate(33.1893 35.0293 9.07788)" fill="#FF9F76"/>
+<rect x="43.249" y="16.4102" width="8.14806" height="7.36584" rx="3.68292" transform="rotate(77.3078 43.249 16.4102)" fill="#FF9F76"/>
+<rect x="44.053" y="26.4722" width="8.14806" height="6.30716" rx="3.15358" transform="rotate(110.178 44.053 26.4722)" fill="#FF9F76"/>
+<rect x="39.6787" y="35.4055" width="8.14806" height="6.29635" rx="3.14818" transform="rotate(145.407 39.6787 35.4055)" fill="#FF9F76"/>
+<rect x="30.5725" y="40.7014" width="8.14806" height="7.36726" rx="3.68363" transform="rotate(-173.386 30.5725 40.7014)" fill="#FF9F76"/>
+<rect x="20.3201" y="39.5618" width="8.14806" height="7.39212" rx="3.69606" transform="rotate(-138.868 20.3201 39.5618)" fill="#FF9F76"/>
+<rect x="13.0059" y="32.2166" width="8.14806" height="7.56172" rx="3.78086" transform="rotate(-100.613 13.0059 32.2166)" fill="#FF9F76"/>
+<rect x="11.3149" y="23.334" width="8.14806" height="7.06033" rx="3.53016" transform="rotate(-72.2115 11.3149 23.334)" fill="#FF9F76"/>
+<rect x="13.8679" y="13.2908" width="8.14806" height="7.16245" rx="3.58123" transform="rotate(-33.1031 13.8679 13.2908)" fill="#FF9F76"/>
+<rect x="22.449" y="7.45142" width="8.14806" height="6.82083" rx="3.41042" transform="rotate(2.17242 22.449 7.45142)" fill="#FF9F76"/>
+<circle cx="27.9151" cy="23.5557" r="11.111" transform="rotate(-180 27.9151 23.5557)" fill="#FFD362"/>
+<ellipse cx="33.4705" cy="21.7039" rx="2.59257" ry="3.3333" fill="#07242A"/>
+<ellipse cx="22.3594" cy="21.7039" rx="2.59257" ry="3.3333" fill="#07242A"/>
+<circle cx="21.6187" cy="21.7039" r="1.1111" fill="white"/>
+<circle cx="32.7298" cy="21.7039" r="1.1111" fill="white"/>
+<path d="M26 29.5C26 29.5 27 30.5 29 30.5C31 30.5 31 29 31 29" stroke="black"/>
+<path d="M33 46.5C31.6637 46.8474 29.5 46 29.5 46C29.5 46 31.2068 43.1589 33 43C34.2301 42.891 36 44 36 44C36 44 34.476 46.1163 33 46.5Z" fill="#AFDA9A"/>
+</svg>

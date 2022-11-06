@@ -5,13 +5,12 @@ var fs = require('fs');
 
 // uploads to ipfs
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResData>) {
-
-    const id = req.body.id;
-
+    const filename = `./${req.body.filename}`;
+    
     var data = new FormData();
-    data.append('file', fs.createReadStream(`./${req.body.id}.json`));
+    data.append('file', fs.createReadStream(filename));
     data.append('pinataOptions', '{"cidVersion": 1}');
-    data.append('pinataMetadata', `{"name": "${req.body.id}.json"}`);
+    data.append('pinataMetadata', `{"name": "${filename}"}`);
 
     var config = {
         method: 'post',
@@ -24,8 +23,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     };
 
     const axios_res = await axios(config);
-
-    console.log(axios_res.data);
-
     return res.status(200).json(axios_res.data);
 };

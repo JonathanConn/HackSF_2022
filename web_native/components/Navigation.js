@@ -1,18 +1,21 @@
 import { React } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import ConnectNonSelectedIcon from '../assets/Front End Materials 1/ConnectNonSelectedIcon';
 import HomeIcon from '../assets/Front End Materials 1/HomeIcon';
 import MyCardsIcon from '../assets/Front End Materials 1/MyCardsIcon';
 import MapIcon from '../assets/Front End Materials 1/MapIcon';
 
 const Navigation = () => {
+    const changePage = (pageName) => {
+
+    }
 
     return (
     <View style={ styles.container }>
-        <View style={ styles.navLink }><HomeIcon selected={true} /></View>
-        <View style={ styles.navLink }><MyCardsIcon selected={false} /></View>
-        <View style={ styles.navLink }><ConnectNonSelectedIcon selected={false}/></View>
-        <View style={ styles.navLink }><MapIcon selected={false}/></View>
+        <Pressable style={ styles.navLink } onPress={() => changePage("Home")}><HomeIcon selected={true} /></Pressable>
+        <Pressable style={ styles.navLink } onPress={() => changePage("MyCards")}><MyCardsIcon selected={false} /></Pressable>
+        <Pressable style={ styles.navLink } onPress={() => changePage("Hndshk")}><ConnectNonSelectedIcon selected={false}/></Pressable>
+        <Pressable style={ styles.navLink } onPress={() => changePage("Map")}><MapIcon selected={false}/></Pressable>
     </View>
     );
 }

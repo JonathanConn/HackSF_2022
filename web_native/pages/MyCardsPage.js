@@ -8,7 +8,7 @@ const HomePage = () => {
 
     return (
     <View>
-        <Text>Map page</Text>
+        <Text>My cards</Text>
     </View>
     );
 }

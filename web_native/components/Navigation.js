@@ -5,10 +5,8 @@ import HomeIcon from '../assets/Front_End_Materials_1/HomeIcon';
 import MyCardsIcon from '../assets/Front_End_Materials_1/MyCardsIcon';
 import MapIcon from '../assets/Front_End_Materials_1/MapIcon';
 
-const Navigation = () => {
-    const changePage = (pageName) => {
+const Navigation = ({ changePage }) => {
 
-    }
 
     return (
     <View style={ styles.container }>

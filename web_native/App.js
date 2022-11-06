@@ -6,23 +6,32 @@ import {
   StyleSheet, 
   View, 
 } from 'react-native';
+import MapPage from './pages/MapPage';
+import MyCardsPage from './pages/MyCardsPage';
+import HndshkPage from './pages/HndshkPage';
 
 
 export default function App() {
   const [pageName, setPageName] = useState('home');
-  // handleCallback = (childData) =>{
-  //     this.setState({name: childData})
-  // }
+  const changePage = (pageName) =>{
+      setPageName(pageName);
+  }
 
   return (
     <View style={styles.container}>
       
       <View style={styles.main}>
-        <HomePage />
+        {
+          pageName == "Home" ? <HomePage /> : 
+          pageName == "MyCards" ? <MyCardsPage /> :
+          pageName == "Hndshk" ? <HndshkPage /> :
+          pageName == "Map" ? <MapPage /> :
+          null
+        }
 
       </View>
 
-      <Navigation style={[styles.navigation]} parentCallBack={this.handleCallBack}/>
+      <Navigation style={[styles.navigation]} changePage={changePage}/>
       <StatusBar style="auto" />
 
     </View>

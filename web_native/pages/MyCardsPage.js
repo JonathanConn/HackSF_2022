@@ -1,5 +1,5 @@
-import { React, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { React, useEffect, useState, useRef } from 'react';
+import { View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
 import NftCard from '../components/NftCard';
 import TopFilter from '../components/TopFilter';
 
@@ -20,18 +20,24 @@ const MyCardsPage = () => {
       setUserContactCards(cards)
   }, [])
 
+
   return (
   <View>
       <TopFilter title="Your Card." showFilter={false} />
-      <ScrollView>
+      <ScrollView 
+      contentContainerStyle={styles.contentContainer}
+      horizontal={true}
+      snapToInterval= {1}
+      >
           {/* for each cards in userContactCards, inject NftCard  */}
           {userContactCards.map((card) => {
               return (
                   <View key={card.id} style={styles.card}>
-                      <NftCard contactCard={card}/>
+                    <NftCard contactCard={card}/>
                   </View>
               )
           })}
+
       </ScrollView>
   </View>
   );
@@ -40,7 +46,13 @@ const MyCardsPage = () => {
 
 const styles = StyleSheet.create({
   card: {
-      margin: 10,
+    margin: 100,
+  },
+
+  contentContainer: {
+    paddingHorizontal: 10,
+    flexWrap:'nowrap',
+    
   }
 
 });
